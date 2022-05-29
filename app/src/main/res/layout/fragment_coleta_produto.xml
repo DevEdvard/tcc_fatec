@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentColetaProduto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.coleta.produto.fragment.ColetaProdutoFragment">
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15sp"
+        tools:text="Coleta de produto"
+        android:textSize="20sp" />
+
+    <Switch
+        android:id="@+id/s_produto_presente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15sp"
+        android:showText="true"
+        android:text="@string/s_produto_presente"
+        android:textColor="@color/purple_700"
+        android:textOff="@string/nao"
+        android:textOn="@string/sim"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <LinearLayout
+        android:id="@+id/ln_preco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:text="@string/preco"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edt_preco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:autofillHints="0.0"
+            android:hint="@string/digite_o_valor"
+            android:inputType="numberDecimal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ln_frentes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:text="@string/quantidade_de_frentes"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edt_frentes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:autofillHints="0"
+            android:hint="@string/digite_o_valor"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ln_estoque"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:text="@string/estoque"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edt_estoque"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:autofillHints="0"
+            android:hint="@string/digite_o_valor"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+</LinearLayout>

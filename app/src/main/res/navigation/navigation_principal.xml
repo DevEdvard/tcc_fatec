@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_principal"
+    app:startDestination="@id/fragmentInicial">
+
+    <fragment
+        android:id="@+id/fragmentInicial"
+        android:name="br.com.tcc.activity.principal.fragment.FragmentInicial"
+        android:label="Início"
+        tools:layout="@layout/fragment_inicial">
+        <action
+            android:id="@+id/action_fragmentInicial_to_fragmentPerfil"
+            app:destination="@id/fragmentPerfil" />
+        <action
+            android:id="@+id/action_fragmentInicial_to_fragmentRoteiro"
+            app:destination="@id/fragmentRoteiro" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentPerfil"
+        android:name="br.com.tcc.activity.principal.fragment.FragmentPerfil"
+        android:label="Perfil"
+        tools:layout="@layout/fragment_perfil" />
+    <fragment
+        android:id="@+id/fragmentRoteiro"
+        android:name="br.com.tcc.activity.principal.fragment.FragmentRoteiro"
+        android:label="Roteiro"
+        tools:layout="@layout/fragment_roteiro" />
+</navigation>

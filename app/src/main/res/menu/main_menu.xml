@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Ínicio"
+        android:id="@+id/fragmentInicial"
+        android:icon="@drawable/ic_baseline_home_24"/>
+
+    <item
+        android:title="Perfil"
+        android:id="@+id/fragmentPerfil"
+        android:icon="@drawable/ic_baseline_person_24"/>
+
+    <item
+        android:title="Roteiro"
+        android:id="@+id/fragmentRoteiro"
+        android:icon="@drawable/ic_baseline_format_list_bulleted_24"/>
+
+</menu>

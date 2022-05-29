@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_roteiro"
+    app:startDestination="@layout/activity_menu_roteiro">
+
+
+    <activity
+        android:id="@+id/menuRoteiroActivity"
+        android:name="br.com.tcc.activity.coleta.MenuRoteiroActivity"
+        android:label="activity_menu_roteiro"
+        tools:layout="@layout/activity_menu_roteiro" />
+
+</navigation>
