@@ -8,13 +8,15 @@ import java.io.Serializable
 class Pesquisa : Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    private var id: Int? = null
-    private var codPessoa: Int? = null
-    private var codLoja: Int? = null
-    private var coletaProduto: Int? = null
-    private var coletaFotoExecucao: Int? = null
-    private var checkin: String? = null
-    private var checkout: String? = null
-    private var transmissao: String? = null
+    var id: Int? = null
+    var codUsuario: Int? = null
+    var codLoja: Int? = null
+    var codJustificativa: Int? = null
+    var desJustificativa: String? = null
+    var coletaProduto: Int? = null
+    var coletaFotoExecucao: Int? = null
+    var checkin: String? = null
+    var checkout: String? = null
+    var transmissao: String? = null
 
 }

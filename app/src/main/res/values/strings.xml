@@ -18,6 +18,7 @@
     <string name="msg_campo_obrigatorio">Campo obrigatório</string>
     <string name="msg_valor_maior_zero">O valor precisa ser maior que ZERO.</string>
     <string name="coleta_produto">Coleta Produto</string>
+    <string name="jutificativa">Justificativa</string>
     <string name="roteiro_alerta_checkout">Para realizar o CHECKIN é preciso realizar a transmissão da loja em aberto.</string>
     <string name="roteiro_enviado">Pesquisa já enviada!</string>
 </resources>

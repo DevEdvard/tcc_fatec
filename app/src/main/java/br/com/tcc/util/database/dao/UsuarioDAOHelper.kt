@@ -16,12 +16,15 @@ interface UsuarioDAOHelper {
     fun selectUsuarioNome(login: String): Usuario
 
     @Query("SELECT * FROM USUARIO")
-    fun select(): List<Usuario>
+    fun select(): Usuario?
 
     @Delete
     fun deletarUsuario(usuario: Usuario)
 
     @Query("DELETE FROM USUARIO")
     fun deleteAll()
+
+    @Query("INSERT INTO USUARIO VALUES (1, 'Eduardo Feitosa Costa', 'teste', '1234', 'Promotor')")
+    fun insertTeste()
 
 }

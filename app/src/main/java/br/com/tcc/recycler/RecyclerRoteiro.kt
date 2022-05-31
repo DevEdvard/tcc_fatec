@@ -22,59 +22,76 @@ class RecyclerRoteiro(private val onItemClicked: (Roteiro) -> Unit, private val 
         RecyclerView.ViewHolder(itemBinding.root) {
 
         fun bindItem(roteiro: Roteiro, onItemClicked: (Roteiro) -> Unit) {
-            itemBinding.txtPrincipal.text = roteiro.nomFantasia
-            itemBinding.txtSecundario.text = roteiro.bandeira
+            itemBinding.apply {
 
-            when (roteiro.flColeta) {
-                0 -> itemBinding.lnStatus.setBackgroundColor(Color.RED)
-                1 -> itemBinding.lnStatus.setBackgroundColor(Color.YELLOW)
-                else -> itemBinding.lnStatus.setBackgroundColor(Color.GREEN)
-            }
+                txtPrincipal.text = roteiro.nomFantasia
+                txtSecundario.text = roteiro.bandeira
 
-            itemView.setOnClickListener {
                 when (roteiro.flColeta) {
                     0 -> {
-                        val db = Database.getInstance(mContext)
-                        val dao = db.roomRoteiroDao
-                        val validaCheckin = dao.validaCheckin(roteiro.id!!)
+                        lnStatus.setBackgroundColor(Color.RED)
+                    }
+                    1, 2 -> {
+                        lnStatus.setBackgroundColor(Color.YELLOW)
+                        txtCheckinHorario.text = roteiro.checkin
 
-                        if (validaCheckin.isEmpty()) {
-                            val alerta = AlertDialog
-                                .Builder(mContext)
-                                .setTitle("Check-in")
-                                .setMessage("Tem certeza que deseja realizar o check-in em " + roteiro.nomFantasia + "?")
-                                .setPositiveButton("Confirmar",
-                                    DialogInterface.OnClickListener { dialog, which ->
-                                        dao.realizaCheckin(roteiro.id!!)
-                                        onItemClicked(roteiro)
-                                    })
-                                .setNegativeButton("Cancelar",
-                                    DialogInterface.OnClickListener { dialog, which ->
-                                        dialog.dismiss()
-                                    })
+                        if (!roteiro.checkout!!.isEmpty()) {
+                            txtCheckoutHorario.text = roteiro.checkout
+                        }
 
-                            alerta.create().show()
-                            db.close()
-                        } else {
+                    }
+                    else -> {
+                        lnStatus.setBackgroundColor(Color.GREEN)
+                        txtCheckinHorario.text = roteiro.checkin
+                        txtCheckoutHorario.text = roteiro.checkout
+                    }
+                }
+
+                itemView.setOnClickListener {
+                    when (roteiro.flColeta) {
+                        0 -> {
+                            val db = Database.getInstance(mContext)
+                            val dao = db.roomRoteiroDao
+                            val validaCheckin = dao.validaCheckin(roteiro.id!!)
+
+                            if (validaCheckin.isEmpty()) {
+                                val alerta = AlertDialog
+                                    .Builder(mContext)
+                                    .setTitle("Check-in")
+                                    .setMessage("Tem certeza que deseja realizar o check-in em " + roteiro.nomFantasia + "?")
+                                    .setPositiveButton("Confirmar",
+                                        DialogInterface.OnClickListener { dialog, which ->
+                                            dao.realizaCheckin(roteiro.id!!, Util.dataHora())
+                                            onItemClicked(roteiro)
+                                        })
+                                    .setNegativeButton("Cancelar",
+                                        DialogInterface.OnClickListener { dialog, which ->
+                                            dialog.dismiss()
+                                        })
+
+                                alerta.create().show()
+                                db.close()
+                            } else {
+                                Util.mensagemSnack(
+                                    itemView,
+                                    itemView.context.resources.getString(R.string.roteiro_alerta_checkout),
+                                    R.color.vermelho,
+                                    0)
+                            }
+                        }
+
+                        1, 2 -> {
+                            onItemClicked(roteiro)
+                        }
+
+                        3 -> {
                             Util.mensagemSnack(
                                 itemView,
-                                itemView.context.resources.getString(R.string.roteiro_alerta_checkout),
-                                R.color.vermelho,
-                                0)
+                                itemView.context.resources.getString(R.string.roteiro_enviado),
+                                R.color.verde,
+                                0
+                            )
                         }
-                    }
-
-                    1 -> {
-                        onItemClicked(roteiro)
-                    }
-
-                    2 -> {
-                        Util.mensagemSnack(
-                            itemView,
-                            itemView.context.resources.getString(R.string.roteiro_enviado),
-                            R.color.verde,
-                            0
-                        )
                     }
                 }
             }

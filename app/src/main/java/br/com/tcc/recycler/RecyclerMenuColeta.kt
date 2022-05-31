@@ -27,7 +27,7 @@ class RecyclerMenuColeta(
         fun bindItem(coleta: Coleta, onItemClicked: (Coleta) -> Unit) {
             val db = Database.getInstance(mContext)
 
-            if (coleta.desColeta.equals("COLETA_PRODUTO") && coleta.staColeta == 1) {
+            if (coleta.desColeta.equals("COLETA_PRODUTO")) {
                 val dao = db.roomSkuDao
                 val validaColeta = dao.selectModuloColetado(loja.id!!)
 
@@ -41,7 +41,7 @@ class RecyclerMenuColeta(
 
             itemView.setOnClickListener {
                 val dao = db.roomRoteiroDao
-                val validaStatus = dao.select(loja.id!!)
+                val validaStatus = dao.selectId(loja.id!!)
 
                 if (validaStatus.flColeta == 1) {
                     onItemClicked(coleta)
@@ -88,20 +88,7 @@ class RecyclerMenuColeta(
 
 
             val coletaProduto = dao.selectColeta("COLETA_PRODUTO")
-            if (coletaProduto.staColeta == 1) {
-                lista.add(coletaProduto)
-            }
-            db.close()
-        }
-
-        if (roteiro.flFotoExecucao == 1) {
-            val db = Database.getInstance(mContext)
-            val dao = db.roomColetaDao
-
-            val coletaFotoExecucao = dao.selectColeta("COLETA_FOTO_EXECUCAO")
-            if (coletaFotoExecucao.staColeta == 1) {
-                lista.add(coletaFotoExecucao)
-            }
+            lista.add(coletaProduto)
             db.close()
         }
 

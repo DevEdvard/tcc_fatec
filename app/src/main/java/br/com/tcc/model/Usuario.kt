@@ -3,6 +3,7 @@ package br.com.tcc.model
 import android.app.Activity
 import android.content.Context
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import br.com.tcc.R
 import br.com.tcc.activity.principal.ActivityPrincipal
@@ -13,9 +14,6 @@ import java.io.Serializable
 @Entity
 class Usuario() : Serializable {
 
-    var PREFS_LOGIN: String = "prefs_usuario";
-    var PREFS_LOGIN_DADOS: String = "prefs_usuario_dados";
-
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null
     var nome: String? = null
@@ -23,15 +21,13 @@ class Usuario() : Serializable {
     var senha: String? = null
     var perfil: String? = null
 
+    @Ignore
+    private var PREFS_LOGIN: String = "prefs_usuario";
+    @Ignore
+    private var PREFS_LOGIN_DADOS: String = "prefs_usuario_dados";
+
     constructor(id: Int, nome: String, login: String, senha: String, perfil: String) : this() {
         this.id = id
-        this.nome = nome
-        this.login = login
-        this.senha = senha
-        this.perfil = perfil
-    }
-
-    constructor(nome: String, login: String, senha: String, perfil: String) : this() {
         this.nome = nome
         this.login = login
         this.senha = senha

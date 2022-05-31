@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.tcc.activity.coleta.MenuRoteiroActivity
 import br.com.tcc.databinding.FragmentRoteiroBinding
+import br.com.tcc.model.Pesquisa
 import br.com.tcc.recycler.RecyclerRoteiro
 import br.com.tcc.util.database.Database
 
@@ -16,6 +17,7 @@ class FragmentRoteiro() : Fragment() {
 
     private var recycler: RecyclerRoteiro? = null
     private lateinit var _binding: FragmentRoteiroBinding
+    private lateinit var mPesquisa: Pesquisa
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,7 +78,7 @@ class FragmentRoteiro() : Fragment() {
     private fun setOnItemClick() {
         this.recycler = RecyclerRoteiro({ itemClicked ->
             val intent = Intent(this@FragmentRoteiro.context, MenuRoteiroActivity::class.java)
-            intent.putExtra("LOJA", itemClicked.id)
+            intent.putExtra("ROTEIRO", itemClicked.id)
             startActivity(intent)
         }, requireContext())
     }

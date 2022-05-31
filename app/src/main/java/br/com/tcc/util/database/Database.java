@@ -7,16 +7,29 @@ import androidx.room.RoomDatabase;
 
 import br.com.tcc.model.Coleta;
 import br.com.tcc.model.ColetaProduto;
+import br.com.tcc.model.Justificativa;
+import br.com.tcc.model.Pesquisa;
 import br.com.tcc.model.Roteiro;
 import br.com.tcc.model.Sku;
 import br.com.tcc.model.Usuario;
 import br.com.tcc.util.database.dao.ColetaDAOHelper;
 import br.com.tcc.util.database.dao.ColetaProdutoDAOHelper;
+import br.com.tcc.util.database.dao.JustificativaDAOHelper;
+import br.com.tcc.util.database.dao.PesquisaDAOHelper;
 import br.com.tcc.util.database.dao.RoteiroDAOHelper;
 import br.com.tcc.util.database.dao.SkuDAOHelper;
 import br.com.tcc.util.database.dao.UsuarioDAOHelper;
 
-@androidx.room.Database(entities = {Usuario.class, Roteiro.class, Coleta.class, Sku.class, ColetaProduto.class}, version = 22, exportSchema = false)
+@androidx.room.Database(entities =
+        {
+                Usuario.class,
+                Roteiro.class,
+                Coleta.class,
+                Sku.class,
+                ColetaProduto.class,
+                Justificativa.class,
+                Pesquisa.class
+        }, version = 31, exportSchema = false)
 public abstract class Database extends RoomDatabase {
 
     private static final String NOME_BD = "tcc.db";
@@ -31,7 +44,9 @@ public abstract class Database extends RoomDatabase {
 
     public abstract ColetaProdutoDAOHelper getRoomColetaProdutoDao();
 
-//    public abstract PesquisaDAOHelper getRoomPesquisaDao();
+    public abstract JustificativaDAOHelper getRoomJusitivicativaDao();
+
+    public abstract PesquisaDAOHelper getRoomPesquisaDao();
 
     public static Database getInstance(Context context) {
         return Room

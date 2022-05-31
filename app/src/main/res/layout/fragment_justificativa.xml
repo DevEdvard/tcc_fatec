@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentColetaProduto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.coleta.produto.fragment.ColetaProdutoFragment">
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15sp"
+        android:text="Selecione a justificativa"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/spn_justificativa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="10sp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif"
+        android:text="Informe o motivo"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/edt_justificativa"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="10sp"
+        android:background="@drawable/buble_edit_projeto"
+        android:ems="40"
+        android:fontFamily="sans-serif"
+        android:gravity="top|left"
+
+        android:inputType="textMultiLine"
+        android:padding="5dp" />
+
+</LinearLayout>

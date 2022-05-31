@@ -5,12 +5,12 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        app:cardUseCompatPadding="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="2dp"
         app:cardElevation="7dp"
         app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,14 +20,14 @@
             android:id="@+id/ln_status"
             android:layout_width="15sp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_marginEnd="10sp"
             android:background="@color/vermelho"
-            android:layout_marginEnd="10sp"/>
+            android:orientation="vertical" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginStart="15sp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp">
 
             <LinearLayout
                 android:id="@+id/container1"
@@ -52,8 +52,51 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:padding="2sp"
                     android:text="@string/texto_2"
                     android:textSize="15sp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txt_checkin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2sp"
+                        android:text="Check-in: "
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txt_checkin_horario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2sp"
+                        android:text="Não realizado"
+                        app:layout_constraintStart_toEndOf="@+id/txt_checkin"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txt_checkout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2sp"
+                        android:text="Check-out: "
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_checkin" />
+
+                    <TextView
+                        android:id="@+id/txt_checkout_horario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2sp"
+                        android:text="Não realizado"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/txt_checkout" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
 

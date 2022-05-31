@@ -8,6 +8,8 @@ import android.widget.EditText
 import android.widget.TextView
 import br.com.tcc.R
 import com.google.android.material.snackbar.Snackbar
+import java.text.DateFormat
+import java.util.*
 
 object Util {
 
@@ -66,6 +68,15 @@ object Util {
         mSnake.setActionTextColor(Color.WHITE)
         mSnake.setAction("OK") { mSnake.dismiss() }
         mSnake.show()
+    }
+
+    fun dataHora() : String {
+        val data = Date()
+        val formatador = DateFormat.getInstance()
+        formatador.format(data)
+        val horaFormatada = formatador.format(data)
+
+        return horaFormatada
     }
 
 }

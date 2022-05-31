@@ -51,7 +51,7 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/img_justificativa"
                 android:layout_width="100sp"
                 android:layout_height="100sp"
@@ -60,13 +60,12 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/menu_justificativa"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/img_checkout"
                 android:layout_width="100sp"
                 android:layout_height="100sp"
@@ -75,13 +74,12 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/menu_checkout"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/img_transmissao"
                 android:layout_width="100sp"
                 android:layout_height="100sp"
@@ -90,7 +88,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/menu_transmissao"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

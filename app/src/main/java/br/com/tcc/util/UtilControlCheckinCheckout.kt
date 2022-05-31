@@ -62,7 +62,7 @@ class UtilControlCheckinCheckout(val loja: Roteiro, val mContext: Context) : App
     private fun realizarCheckIn() {
         val db = Database.getInstance(mContext)
         val dao = db.roomRoteiroDao
-        dao.realizaCheckin(loja.id!!)
+        dao.realizaCheckin(loja.id!!, Util.dataHora())
         db.close()
     }
 
