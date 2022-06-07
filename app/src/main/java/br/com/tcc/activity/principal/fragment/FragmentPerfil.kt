@@ -5,14 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import br.com.tcc.databinding.FragmentPerfilBinding
 import br.com.tcc.model.Usuario
 import br.com.tcc.util.database.Database
 
 class FragmentPerfil : Fragment() {
 
-    private lateinit var _biding : FragmentPerfilBinding
+    private lateinit var _biding: FragmentPerfilBinding
     private lateinit var usuario: Usuario
 
     override fun onCreateView(
@@ -30,12 +29,13 @@ class FragmentPerfil : Fragment() {
 
         val usuarioSelected = dao.select()
 
-        if(usuarioSelected == null) {
+        if (usuarioSelected == null) {
             dao.insertTeste()
             usuario = dao.select()!!
         } else {
-            usuario = usuarioSelected!!
+            usuario = usuarioSelected
         }
+        db.close()
 
         _biding.apply {
             txtNomeUsuario.text = usuario.nome

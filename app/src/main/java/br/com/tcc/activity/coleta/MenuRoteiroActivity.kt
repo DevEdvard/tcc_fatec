@@ -31,10 +31,6 @@ class MenuRoteiroActivity : AppCompat() {
         controles()
     }
 
-    override fun onShow(dialog: DialogInterface?) {
-        TODO("Not yet implemented")
-    }
-
     override fun onResume() {
         super.onResume()
         recyclerMenu!!.notifyDataSetChanged()
@@ -69,6 +65,7 @@ class MenuRoteiroActivity : AppCompat() {
 
             if (roteiro.flColeta != 1 && mPesquisa.codJustificativa != 0) {
                 imgJustificativa.setBackgroundResource(R.drawable.menu_justificativa_ok)
+                imgCheckout.setBackgroundResource(R.drawable.menu_checkout_ok)
             } else if (roteiro.flColeta != 1 && mPesquisa.codJustificativa == 0) {
                 imgCheckout.setBackgroundResource(R.drawable.menu_checkout_ok)
             }
@@ -133,7 +130,7 @@ class MenuRoteiroActivity : AppCompat() {
                     aviso("Justificativa", "Loja já justificada.")
                 } else {
                     aviso("Justificativa",
-                        "Não é possivel justificar pois já foi realizado check-out na loja.")
+                        "Não é possivel justificar, pois já foi realizado check-out na loja.")
                 }
             }
 

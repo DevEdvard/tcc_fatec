@@ -19,7 +19,7 @@ interface PesquisaDAOHelper {
     fun deleteId(id: Int)
 
     @Query("SELECT * FROM PESQUISA WHERE ID = :id")
-    fun selectId(id: Int) : Pesquisa
+    fun selectId(id: Int?) : Pesquisa
 
     @Insert
     fun insert(pesquisa: Pesquisa)

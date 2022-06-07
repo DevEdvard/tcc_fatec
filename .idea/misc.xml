@@ -29,12 +29,17 @@
         <entry key="..\:/Admin/Documents/projetos/CartorioVirtual/app/src/main/res/menu/main_menu.xml" value="0.2" />
         <entry key="..\:/Admin/Documents/projetos/tcc/app/src/main/res/drawable/buble_edit_projeto.xml" value="0.155" />
         <entry key="..\:/Admin/Documents/projetos/tcc/app/src/main/res/layout/activity_menu_roteiro.xml" value="0.27447916666666666" />
+        <entry key="..\:/Admin/Documents/projetos/tcc/app/src/main/res/layout/activity_principal.xml" value="0.21944444444444444" />
         <entry key="..\:/Admin/Documents/projetos/tcc/app/src/main/res/layout/adapter_generic.xml" value="0.27447916666666666" />
         <entry key="..\:/Admin/Documents/projetos/tcc/app/src/main/res/layout/fragment_coleta_produto.xml" value="0.27447916666666666" />
+        <entry key="..\:/Admin/Documents/projetos/tcc/app/src/main/res/layout/fragment_inicial.xml" value="0.27447916666666666" />
         <entry key="..\:/Admin/Documents/projetos/tcc/app/src/main/res/layout/fragment_justificativa.xml" value="0.27447916666666666" />
         <entry key="..\:/Admin/Documents/projetos/tcc/app/src/main/res/layout/fragment_perfil.xml" value="0.27447916666666666" />
+        <entry key="..\:/Admin/Documents/projetos/tcc/app/src/main/res/layout/fragment_roteiro.xml" value="0.27447916666666666" />
         <entry key="..\:/Admin/Documents/projetos/tcc/app/src/main/res/layout/layout_image_button.xml" value="0.27447916666666666" />
+        <entry key="..\:/Admin/Documents/projetos/tcc/app/src/main/res/layout/loading.xml" value="0.27447916666666666" />
         <entry key="..\:/Admin/Documents/projetos/tcc/app/src/main/res/layout/rec_roteiro.xml" value="0.27447916666666666" />
+        <entry key="..\:/Admin/Documents/projetos/tcc/app/src/main/res/xml/file_paths.xml" value="0.109375" />
         <entry key="..\:/Users/Admin/Documents/projetos/CartorioVirtual/app/src/main/res/layout/activity_login.xml" value="0.4" />
         <entry key="..\:/Users/Admin/Documents/projetos/CartorioVirtual/app/src/main/res/layout/activity_tela_inicial.xml" value="0.27447916666666666" />
       </map>

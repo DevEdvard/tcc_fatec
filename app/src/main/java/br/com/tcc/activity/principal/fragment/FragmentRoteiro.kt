@@ -45,7 +45,7 @@ class FragmentRoteiro() : Fragment() {
         val dao = db.roomSkuDao
         val listaSkus = dao.selectAll()
 
-        if(listaSkus.isEmpty()){
+        if (listaSkus.isEmpty()) {
             dao.insertSkuTeste()
         }
         db.close()

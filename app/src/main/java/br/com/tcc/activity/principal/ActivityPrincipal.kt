@@ -2,16 +2,15 @@ package br.com.tcc.activity.principal
 
 import android.os.Bundle
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import br.com.tcc.R
+import br.com.tcc.controller.AppCompat
 import br.com.tcc.databinding.ActivityPrincipalBinding
 import br.com.tcc.model.Usuario
-import br.com.tcc.util.database.Database
 
-class ActivityPrincipal : AppCompatActivity() {
+class ActivityPrincipal : AppCompat() {
 
     private lateinit var _binding: ActivityPrincipalBinding
 
@@ -39,11 +38,9 @@ class ActivityPrincipal : AppCompatActivity() {
         val navHostFragment =
             (supportFragmentManager.findFragmentById(_binding.fragmentContainerView.id)) as NavHostFragment
         val navController = navHostFragment.navController
-        navController.enableOnBackPressed(false)
 
         _binding.bottomNavigation.setupWithNavController(navController)
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         _binding.toolbarPrincipal.setupWithNavController(navController, appBarConfiguration)
     }
-
 }

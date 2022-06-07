@@ -1,18 +1,22 @@
 package br.com.tcc.activity
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import android.widget.Toast
+import br.com.tcc.R
 import br.com.tcc.activity.principal.ActivityPrincipal
 import br.com.tcc.controller.AppCompat
 import br.com.tcc.databinding.ActivityLoginBinding
 import br.com.tcc.model.Usuario
+import br.com.tcc.util.Alerta
+import br.com.tcc.util.Util
 import br.com.tcc.util.database.Database
+import br.com.tcc.util.webclient.tasks.TaskLogin
 
 
-val usuarioTeste = Usuario(1, "User Tester", "teste", "1234", "Promotor")
+val usuarioTeste = Usuario(1, "User Tester", "teste", "1234", "Promotor", "")
 
 class ActivityLogin : AppCompat() {
 
@@ -26,14 +30,9 @@ class ActivityLogin : AppCompat() {
 
         val db: Database = Database.getInstance(this)
         val dao = db.getRoomUsuarioDao()
-
         dao.deleteAll()
         dao.insert(usuarioTeste)
         db.close()
-    }
-
-    override fun onShow(dialog: DialogInterface?) {
-        TODO("Not yet implemented")
     }
 
     private fun criaUsuarioTeste(): Usuario {
@@ -63,7 +62,7 @@ class ActivityLogin : AppCompat() {
         _binding.loginBtnEntrar.setOnClickListener(this)
     }
 
-    private fun validaUsuário(usuario: Usuario, usuarioTeste: Usuario) {
+    private fun validaUsuario(usuario: Usuario, usuarioTeste: Usuario) {
         if (!usuario.login.isNullOrEmpty() || !usuario.senha.isNullOrEmpty()) {
             if (usuario.login == usuarioTeste.login && usuario.senha == usuarioTeste.senha) {
                 Toast.makeText(this, "Login Efetuado!", Toast.LENGTH_SHORT).show()
@@ -79,11 +78,69 @@ class ActivityLogin : AppCompat() {
         }
     }
 
+    private fun validaUsuario2() {
+
+//        if (!CheckReadPermission.validaPermissao(this)) {
+//            if (Build.VERSION.SDK_INT >= 23)
+//                CheckReadPermission.show(this@ActivityLogin)
+//
+//            return
+//        }
+
+        if (!Util.validaEditText(_binding.loginEdtUsuario, this@ActivityLogin)
+            || !Util.validaEditText(_binding.loginEdtSenha, this@ActivityLogin)
+        )
+            return
+
+        val db = Database.getInstance(this)
+        val dao = db.roomUsuarioDao
+
+        val usuario = _binding.loginEdtUsuario.text.toString()
+        val senha = _binding.loginEdtSenha.text.toString()
+
+        val login = dao.selectUsuarioNome(usuario)
+        db.close()
+
+        if (login != null)
+            Usuario().iniciar(this@ActivityLogin, login, true)
+        else
+            TaskLogin(this@ActivityLogin).execute(usuario, senha)
+    }
+
     override fun onClick(v: View?) {
         when (v) {
             _binding.loginBtnEntrar -> {
-                validaUsuário(criaUsuarioTeste(), usuarioTeste)
+//                validaUsuario(criaUsuarioTeste(), usuarioTeste)
+                validaUsuario2()
             }
+        }
+    }
+
+    override fun onRetorno(aBoolean: Boolean, mensagem: String) {
+        try {
+            if (aBoolean) {
+
+                val db = Database.getInstance(this)
+                val dao = db.roomUsuarioDao
+
+                val usuario = _binding.loginEdtUsuario.text.toString()
+                val senha = _binding.loginEdtSenha.text.toString()
+
+                val login = dao.select()
+                db.close()
+
+                Usuario().iniciar(this@ActivityLogin, login, true)
+
+            } else
+                Alerta.show(
+                    this@ActivityLogin,
+                    resources.getString(R.string.msg_atencao),
+                    Html.fromHtml(mensagem).toString(),
+                    true
+                )
+
+        } catch (err: Exception) {
+            err.toString()
         }
     }
 }

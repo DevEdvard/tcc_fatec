@@ -13,7 +13,7 @@ interface UsuarioDAOHelper {
     fun insert(usuario: Usuario)
 
     @Query("SELECT * FROM USUARIO WHERE LOGIN = :login")
-    fun selectUsuarioNome(login: String): Usuario
+    fun selectUsuarioNome(login: String): Usuario?
 
     @Query("SELECT * FROM USUARIO")
     fun select(): Usuario?
@@ -24,7 +24,7 @@ interface UsuarioDAOHelper {
     @Query("DELETE FROM USUARIO")
     fun deleteAll()
 
-    @Query("INSERT INTO USUARIO VALUES (1, 'Eduardo Feitosa Costa', 'teste', '1234', 'Promotor')")
+    @Query("INSERT INTO USUARIO VALUES (1, 'Eduardo Feitosa Costa', 'teste', '1234', 'Promotor', '')")
     fun insertTeste()
 
 }

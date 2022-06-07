@@ -10,4 +10,8 @@ abstract class FragmentCompat : DialogFragment(), DialogInterface.OnShowListener
     override fun onClick(v: View?) {
 
     }
+
+    override fun onShow(dialog: DialogInterface?) {
+        TODO("Not yet implemented")
+    }
 }

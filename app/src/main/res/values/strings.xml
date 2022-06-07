@@ -21,4 +21,51 @@
     <string name="jutificativa">Justificativa</string>
     <string name="roteiro_alerta_checkout">Para realizar o CHECKIN é preciso realizar a transmissão da loja em aberto.</string>
     <string name="roteiro_enviado">Pesquisa já enviada!</string>
+
+    <!-- TASK MSG LOADING -->
+    <string name="login_loading_validando">Buscando informações... aguarde!</string>
+
+    <!-- ERROS -->
+    <string name="erro_dados">Erro ao obter os dados.</string>
+    <string name="erro_400">Erro 400: Falha na comunicação com servidor.</string>
+    <string name="erro_401">Erro 401: Falha de autenticação.</string>
+    <string name="erro_403">Erro 403: Acesso não autorizado.</string>
+    <string name="erro_404">Erro 404: Arquivo de acesso não encontrado.</string>
+    <string name="erro_500">Erro 500: Servidor não responde.</string>
+    <string name="erro_502">Erro 502: Falha no Gateway.</string>
+    <string name="erro_503">Erro 503: Serviço não disponível.</string>
+    <string name="erro_504">Erro 504: Servidor sem resposta.</string>
+    <string name="erro_default">Erro _CODE: Erro desconhecido.</string>
+    <string name="erro_foto">Foto não encontrada.</string>
+    <string name="erro_lista">Lista vazia.</string>
+    <string name="erro_conexao">Verifique sua conexão ou tente novamente!</string>
+    <string name="erro_servidor_expirado">Pedido ao servidor expirado. Verifique com o administrador!</string>
+    <string name="erro_arquivo_nao_encontrado">Arquivo não encontrado</string>
+    <string name="erro_erro_banco">Ocorreu um erro no banco interno SQLite.</string>
+    <string name="erro_campo_formatacao">Verifique o campo digitado, e insira a formatação solicitada!</string>
+    <string name="erro_nao_identificado">Ocorreu um erro não identificado</string>
+    <string name="erro_data_pesquisa">Dados de pesquisa não localizado.</string>
+    <string name="erro_data_pesquisa_pendente">Dados de pesquisa não localizado.</string>
+
+    <!-- PERMISSOES -->
+    <string name="msg_permissao">Para que o aplicativo funcione corretamente você precisa conceder acesso:</string>
+    <string name="msg_permissao_alerta">Para prosseguir, é preciso permitir alguns permissões!</string>
+    <string name="permission_audio">AUDIO</string>
+    <string name="permission_sd_card_escrita">SD CARD ESCRITA</string>
+    <string name="permission_sd_card_leitura">SD CARD LEITURA</string>
+    <string name="permission_camera">CAMERA</string>
+    <string name="permission_localizacao">LOCALIZAÇÃO</string>
+    <string name="permission_telefone">TELEFONE</string>
+    <string name="permission_internet">INTERNET</string>
+
+    <!-- BOTOES -->
+    <string name="btn_ok">OK</string>
+    <string name="btn_fechar">Fechar</string>
+    <string name="btn_cancelar">Cancelar</string>
+
+    <!-- MENSAGENS PADRÃO TITULO -->
+    <string name="msg_erro">Erro</string>
+    <string name="msg_resetar">Resetar</string>
+    <string name="msg_pesquisa">Pesquisa</string>
+    <string name="msg_atencao">Atenção</string>
 </resources>
