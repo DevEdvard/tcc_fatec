@@ -12,7 +12,7 @@ interface CallBack_Projeto {
 //    fun onRetorno(posicao : Int)
 //    fun onRetorno(posicao : Int, produto: Sku)
 //    fun onRetorno(boolean : Boolean, posicao : Int)
-//    fun onRetorno()
+    fun onRetorno()
 //
 //    fun onRetorno(aBolean: Boolean, data: String?, mensagem: String?)
 //    fun onRetorno(aBolean: Boolean, data: String?, mensagem: String?, nomeArquivo: String?)

@@ -1,5 +1,7 @@
 package br.com.tcc.activity.principal
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.TextView
 import androidx.navigation.fragment.NavHostFragment
@@ -42,5 +44,15 @@ class ActivityPrincipal : AppCompat() {
         _binding.bottomNavigation.setupWithNavController(navController)
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         _binding.toolbarPrincipal.setupWithNavController(navController, appBarConfiguration)
+    }
+
+    override fun onRetorno(aBoolean: Boolean, mensagem: String) {
+        val AlertDialog = AlertDialog
+            .Builder(this)
+            .setTitle("Dados atualizados")
+            .setMessage("Os dados foram atualizados com sucesso!")
+            .setNegativeButton("Ok",
+                DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
+        AlertDialog.create().show()
     }
 }

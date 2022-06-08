@@ -29,11 +29,10 @@ class RecyclerMenuColeta(
 
             if (coleta.desColeta.equals("COLETA_PRODUTO")) {
                 val dao = db.roomSkuDao
-                val validaColeta = dao.selectModuloColetado(loja.id!!)
+                val validaColeta = dao.selectModuloColetado(loja.codLoja!!)
 
                 if (!validaColeta.isEmpty()) {
                     itemView.setBackgroundResource(R.drawable.menu_produto)
-
                 } else {
                     itemView.setBackgroundResource(R.drawable.menu_produto_ok)
                 }
@@ -41,7 +40,7 @@ class RecyclerMenuColeta(
 
             itemView.setOnClickListener {
                 val dao = db.roomRoteiroDao
-                val validaStatus = dao.selectId(loja.id!!)
+                val validaStatus = dao.selectCod(loja.codLoja!!)
 
                 if (validaStatus.flColeta == 1) {
                     onItemClicked(coleta)

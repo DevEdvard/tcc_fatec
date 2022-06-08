@@ -27,7 +27,7 @@ class Usuario() : Serializable {
     var senha: String? = null
     @SerializedName("desPerfil")
     var perfil: String? = null
-    @SerializedName("email")
+    @SerializedName("fotoPerfil")
     var fotoPerfil: String? = null
 
     @Ignore

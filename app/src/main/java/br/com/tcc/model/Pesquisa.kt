@@ -10,7 +10,7 @@ class Pesquisa : Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null
     var codUsuario: Int? = null
-    var codLoja: Int? = null
+    var codRoteiro: Int? = null
     var codJustificativa: Int? = null
     var desJustificativa: String? = null
     var coletaProduto: Int? = null

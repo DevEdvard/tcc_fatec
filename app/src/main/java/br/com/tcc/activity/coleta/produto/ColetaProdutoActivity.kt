@@ -33,7 +33,7 @@ class ColetaProdutoActivity : AppCompatActivity() {
         val extra = intent.getIntExtra("LOJA_ROTEIRO", 0)
         val db = Database.getInstance(this)
         val dao = db.roomRoteiroDao
-        val roteiro = dao.selectLojaRoteiro(extra)
+        val roteiro = dao.selectId(extra)
         db.close()
         return roteiro
     }
@@ -54,7 +54,7 @@ class ColetaProdutoActivity : AppCompatActivity() {
         val db = Database.getInstance(this)
         val dao = db.roomSkuDao
 
-        val dataSource = dao.selectListaSkuColeta(loja.id!!)
+        val dataSource = dao.selectListaSkuColeta(loja.codLoja!!)
         recyclerColetaProduto!!.setDataSource(dataSource)
         db.close()
 

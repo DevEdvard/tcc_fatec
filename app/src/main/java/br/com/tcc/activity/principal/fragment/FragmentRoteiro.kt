@@ -45,23 +45,15 @@ class FragmentRoteiro() : Fragment() {
         val dao = db.roomSkuDao
         val listaSkus = dao.selectAll()
 
-        if (listaSkus.isEmpty()) {
-            dao.insertSkuTeste()
-        }
+//        if (listaSkus.isEmpty()) {
+//            dao.insertSkuTeste()
+//        }
         db.close()
     }
 
     private fun setarDados() {
         val database = Database.getInstance(this.context)
         val db = database.roomRoteiroDao
-
-        db.apply {
-            if (selectListaRoteiro().isEmpty()) {
-                deleteAll()
-                inserirLojasTeste()
-            }
-        }
-
         val dataSource = db.selectListaRoteiro()
         this.recycler!!.setDataSource(dataSource)
         database.close()

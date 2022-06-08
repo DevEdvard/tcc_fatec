@@ -68,4 +68,6 @@
     <string name="msg_resetar">Resetar</string>
     <string name="msg_pesquisa">Pesquisa</string>
     <string name="msg_atencao">Atenção</string>
+
+    <string name="roteiro_atualizado_sincronizacao">Já existe roteiro atualizado para hoje, deseja sincronizar novamente?\n\nSe "SIM", os dados já coletados serão apagados!</string>
 </resources>

@@ -84,7 +84,6 @@ class JustificativaFragment(id: Int?) : FragmentCompat(), AdapterView.OnItemSele
     override fun onClick(v: View?) {
         when (v) {
             btnSalvar -> gravar()
-
             btnFechar -> this.dialog!!.dismiss()
         }
     }
@@ -112,7 +111,7 @@ class JustificativaFragment(id: Int?) : FragmentCompat(), AdapterView.OnItemSele
 
         _binding.apply {
             mPesquisa.codUsuario = usuario!!.id
-            mPesquisa.codLoja = idLoja
+            mPesquisa.codRoteiro = idLoja
             mPesquisa.codJustificativa = mJustificativa.id
             mPesquisa.desJustificativa = mJustificativa.descricao
             mPesquisa.coletaProduto = 0
@@ -121,7 +120,7 @@ class JustificativaFragment(id: Int?) : FragmentCompat(), AdapterView.OnItemSele
             mPesquisa.checkout = ""
             mPesquisa.transmissao = ""
             daoPesquisa.insert(mPesquisa)
-            daoRoteiro.realizaCheckout(idLoja!!, Util.dataHora())
+            daoRoteiro.justifica(idLoja!!, Util.dataHora())
             db.close()
             this@JustificativaFragment.dialog!!.dismiss()
         }
