@@ -1,15 +1,14 @@
 package br.com.tcc.activity.coleta.produto
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.com.tcc.activity.coleta.produto.fragment.ColetaProdutoFragment
+import br.com.tcc.controller.AppCompat
 import br.com.tcc.databinding.ActivityColetaProdutoBinding
 import br.com.tcc.model.Roteiro
 import br.com.tcc.recycler.RecyclerColetaProduto
 import br.com.tcc.util.database.Database
 
-class ColetaProdutoActivity : AppCompatActivity() {
+class ColetaProdutoActivity : AppCompat() {
 
     private var recyclerColetaProduto: RecyclerColetaProduto? = null
     private lateinit var _binding: ActivityColetaProdutoBinding
@@ -43,7 +42,7 @@ class ColetaProdutoActivity : AppCompatActivity() {
     }
 
     private fun iniciarRecycler() {
-        setOnItemClick()
+        recyclerColetaProduto = RecyclerColetaProduto ({ itemClicked -> },this, loja.id!!)
         _binding.recyclerViewColetaProduto.apply {
             layoutManager = LinearLayoutManager(this.context)
             adapter = recyclerColetaProduto
@@ -57,27 +56,9 @@ class ColetaProdutoActivity : AppCompatActivity() {
         val dataSource = dao.selectListaSkuColeta(loja.codLoja!!)
         recyclerColetaProduto!!.setDataSource(dataSource)
         db.close()
-
     }
 
-    private fun setOnItemClick() {
-        recyclerColetaProduto = RecyclerColetaProduto { itemClicked ->
-
-            if (itemClicked.flColetado == 1) {
-
-                val db = Database.getInstance(this)
-                val dao = db.roomColetaProdutoDao
-
-                itemClicked.id?.let {
-                    val coletaProduto = dao.selectColetaProduto(it)
-                    val dialog = ColetaProdutoFragment(coletaProduto.idProduto!!)
-                    dialog.show(supportFragmentManager, "coletaProdutoDialog")
-                    db.close()
-                }
-            } else {
-                val dialog = ColetaProdutoFragment(itemClicked.id!!)
-                dialog.show(supportFragmentManager, "coletaProdutoDialog")
-            }
-        }
+    override fun onRetorno(posicao: Int) {
+        recyclerColetaProduto!!.notifyItemChanged(posicao)
     }
 }

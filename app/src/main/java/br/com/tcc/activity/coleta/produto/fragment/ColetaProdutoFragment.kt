@@ -3,6 +3,7 @@ package br.com.tcc.activity.coleta.produto.fragment
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,21 +11,29 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import br.com.tcc.R
+import br.com.tcc.controller.CallBack_Projeto
 import br.com.tcc.controller.FragmentCompat
 import br.com.tcc.databinding.FragmentColetaProdutoBinding
 import br.com.tcc.model.ColetaProduto
+import br.com.tcc.model.Pesquisa
+import br.com.tcc.model.Sku
 import br.com.tcc.util.Util
 import br.com.tcc.util.database.Database
 
 
-class ColetaProdutoFragment(id: Int?) : FragmentCompat() {
+class ColetaProdutoFragment(id: Int?, context: Context, roteiro: Int) : FragmentCompat() {
 
-    private var mColetaProduto: ColetaProduto? = null
     private lateinit var _binding: FragmentColetaProdutoBinding
     private lateinit var mAlertDialog: AlertDialog
     private lateinit var btnSalvar: Button
     private lateinit var btnFechar: Button
+    private var mColetaProduto: ColetaProduto? = null
+    private var mPesquisa: Pesquisa? = null
+    private var codRoteiro = roteiro
     private var idProduto = id
+    private var mContext = context
+    private var produto: Sku? = null
+    private var posicao: Int? = 0
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = FragmentColetaProdutoBinding.inflate(LayoutInflater.from(context))
@@ -51,6 +60,12 @@ class ColetaProdutoFragment(id: Int?) : FragmentCompat() {
     }
 
     private fun controles() {
+
+        if (arguments != null) {
+            produto = requireArguments().getSerializable("sku") as Sku
+            posicao = requireArguments().getInt("posicao")
+        }
+
         setTitleDialog()
         mColetaProduto = recuperaProduto()
         recuperaDadosProduto()
@@ -103,12 +118,16 @@ class ColetaProdutoFragment(id: Int?) : FragmentCompat() {
         val daoColetaProduto = db.roomColetaProdutoDao
         val daoSku = db.roomSkuDao
         daoColetaProduto.deleteId(idProduto)
+        val daoPesquisa = db.roomPesquisaDao
+        mPesquisa = daoPesquisa.selectRoteiro(codRoteiro)
+
         val mColeta = ColetaProduto()
 
         _binding.apply {
             mColeta.idProduto = idProduto
             mColeta.desProduto = daoSku.select(idProduto!!).desc
             mColeta.desMarca = daoSku.select(idProduto!!).marca
+            mColeta.codPesquisa = mPesquisa!!.id
             mColeta.flPresente = if (sProdutoPresente.isChecked) 1 else 0
             mColeta.preco = if (sProdutoPresente.isChecked) edtPreco.text.toString() else ""
             mColeta.frentes =
@@ -118,8 +137,11 @@ class ColetaProdutoFragment(id: Int?) : FragmentCompat() {
             daoSku.updateColetado(idProduto!!)
             daoColetaProduto.insert(mColeta)
             db.close()
-            this@ColetaProdutoFragment.dialog!!.dismiss()
         }
+        this@ColetaProdutoFragment.dialog!!.dismiss()
+
+        val callback = mContext as CallBack_Projeto
+        callback.onRetorno(posicao!!)
     }
 
 

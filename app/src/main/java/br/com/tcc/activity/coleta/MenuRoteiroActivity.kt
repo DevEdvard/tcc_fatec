@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.tcc.R
 import br.com.tcc.activity.coleta.fragment.JustificativaFragment
@@ -16,15 +15,20 @@ import br.com.tcc.model.Pesquisa
 import br.com.tcc.model.Roteiro
 import br.com.tcc.model.Sku
 import br.com.tcc.recycler.RecyclerMenuColeta
+import br.com.tcc.util.Alerta
+import br.com.tcc.util.Loading
 import br.com.tcc.util.Util
 import br.com.tcc.util.database.Database
 import br.com.tcc.util.database.dao.RoteiroDAOHelper
+import br.com.tcc.util.webclient.tasks.TaskEnviarDados
 
 class MenuRoteiroActivity : AppCompat() {
 
     private var recyclerMenu: RecyclerMenuColeta? = null
     private lateinit var _binding: ActivityMenuRoteiroBinding
     private lateinit var loja: Roteiro
+    private var mPesquisa: Pesquisa? = null
+    private var mContext = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +44,17 @@ class MenuRoteiroActivity : AppCompat() {
 
     private fun controles() {
         loja = getExtras()
+        recuperaPesquisa()
         configuraToolBar()
         iniciarRecycler()
         setarDadosColeta()
         setarBtnPesquisa()
+    }
+
+    private fun recuperaPesquisa() {
+        val db = Database.getInstance(this)
+        val dao = db.roomPesquisaDao
+        mPesquisa = dao.selectRoteiro(loja.id)
     }
 
     private fun configuraToolBar() {
@@ -122,8 +133,17 @@ class MenuRoteiroActivity : AppCompat() {
                 validaCheckout(roteiro, validaColetaProduto, daoRoteiro)
             }
 
-            _binding.imgTransmissao -> Toast.makeText(this, "Clicou mesmo", Toast.LENGTH_SHORT)
-                .show()
+            _binding.imgTransmissao -> {
+                Alerta.show(
+                    this@MenuRoteiroActivity, resources.getString(R.string.msg_pesquisa),
+                    resources.getString(R.string.transmissao_msg_envio),
+                    resources.getString(R.string.sim),
+                    DialogInterface.OnClickListener { dialog, which ->
+//                        Loading.show(this, this.resources.getString(R.string.login_loading_validando))
+                        TaskEnviarDados(mContext, mPesquisa!!).execute()
+                    }, false
+                )
+            }
         }
         db.close()
     }
@@ -193,20 +213,26 @@ class MenuRoteiroActivity : AppCompat() {
         val daoRoteiro = db.roomRoteiroDao
         val roteiro = daoRoteiro.selectId(loja.id!!)
 
-        val mPesquisa = Pesquisa()
+        val seTemPesquisa = daoPesquisa.selectRoteiro(loja.id)
 
-        mPesquisa.apply {
-            codUsuario = daoUsuario.select()!!.id
-            codRoteiro = loja.id
-            codJustificativa = 0
-            desJustificativa = ""
-            coletaProduto = roteiro.flProduto
-            coletaFotoExecucao = roteiro.flFotoExecucao
-            checkin = roteiro.checkin
-            checkout = roteiro.checkout
+        if (seTemPesquisa != null) {
+            val mPesquisa = Pesquisa()
+
+            mPesquisa.apply {
+                codUsuario = daoUsuario.select()!!.id
+                codRoteiro = loja.id
+                codJustificativa = 0
+                desJustificativa = ""
+                coletaProduto = roteiro.flProduto
+                coletaFotoExecucao = roteiro.flFotoExecucao
+                checkin = roteiro.checkin
+                checkout = roteiro.checkout
+                transmissao = ""
+            }
+
+            daoPesquisa.deleteId(loja.id!!)
+            daoPesquisa.insert(mPesquisa)
         }
-
-        daoPesquisa.insert(mPesquisa)
         db.close()
     }
 

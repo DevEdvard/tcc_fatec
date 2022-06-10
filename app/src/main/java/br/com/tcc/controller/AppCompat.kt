@@ -23,4 +23,8 @@ abstract class AppCompat : AppCompatActivity(), CallBack_Projeto, View.OnClickLi
     override fun onShow(dialog: DialogInterface?) {
         TODO("Not yet implemented")
     }
+
+    override fun onRetorno(posicao: Int) {
+        TODO("Not yet implemented")
+    }
 }

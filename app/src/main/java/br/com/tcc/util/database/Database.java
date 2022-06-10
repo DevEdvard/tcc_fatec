@@ -29,7 +29,7 @@ import br.com.tcc.util.database.dao.UsuarioDAOHelper;
                 ColetaProduto.class,
                 Justificativa.class,
                 Pesquisa.class
-        }, version = 37, exportSchema = false)
+        }, version = 39, exportSchema = false)
 public abstract class Database extends RoomDatabase {
 
     private static final String NOME_BD = "tcc.db";

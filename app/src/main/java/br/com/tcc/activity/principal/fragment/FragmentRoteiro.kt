@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.tcc.activity.coleta.MenuRoteiroActivity
 import br.com.tcc.databinding.FragmentRoteiroBinding
 import br.com.tcc.model.Pesquisa
+import br.com.tcc.model.Usuario
 import br.com.tcc.recycler.RecyclerRoteiro
 import br.com.tcc.util.database.Database
 
@@ -69,6 +70,30 @@ class FragmentRoteiro() : Fragment() {
 
     private fun setOnItemClick() {
         this.recycler = RecyclerRoteiro({ itemClicked ->
+
+            val mPesquisa = Pesquisa()
+            val db = Database.getInstance(requireContext())
+            val dao = db.roomPesquisaDao
+
+            val seTemPesquisa = dao.selectRoteiro(itemClicked.id)
+
+            if(seTemPesquisa == null) {
+                mPesquisa.apply {
+                    codUsuario = Usuario().retornar(requireContext())!!.id
+                    codRoteiro = itemClicked.id
+                    codJustificativa = 0
+                    desJustificativa = ""
+                    coletaProduto = 0
+                    coletaFotoExecucao = 0
+                    checkin = ""
+                    checkout = ""
+                    transmissao = ""
+                }
+
+                dao.insert(mPesquisa)
+            }
+
+            db.close()
             val intent = Intent(this@FragmentRoteiro.context, MenuRoteiroActivity::class.java)
             intent.putExtra("ROTEIRO", itemClicked.id)
             startActivity(intent)

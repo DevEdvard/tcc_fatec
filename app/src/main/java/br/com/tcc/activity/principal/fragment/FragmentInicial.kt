@@ -45,7 +45,6 @@ class FragmentInicial : FragmentCompat() {
     override fun onClick(v: View?) {
         when (v) {
             fabAtualizar -> {
-//                fabAtualizar!!.setClickable(false);
                 val db = Database.getInstance(requireContext())
                 val dao = db.roomRoteiroDao
                 val listaRoteiro = dao.selectListaRoteiro()
@@ -74,15 +73,4 @@ class FragmentInicial : FragmentCompat() {
             }
         }
     }
-
-//    override fun onRetorno(aBoolean: Boolean, mensagem: String) {
-//        if (fabAtualizar != null) fabAtualizar!!.isClickable = true
-//        val AlertDialog = AlertDialog
-//            .Builder(requireContext())
-//            .setTitle("Dados atualizados!")
-//            .setMessage(mensagem)
-//            .setNegativeButton("Ok",
-//                DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
-//        AlertDialog.create().show()
-//    }
 }

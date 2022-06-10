@@ -68,6 +68,30 @@
     <string name="msg_resetar">Resetar</string>
     <string name="msg_pesquisa">Pesquisa</string>
     <string name="msg_atencao">Atenção</string>
+    <string name="transmissao_msg_envio">Deseja enviar os dados?</string>
 
     <string name="roteiro_atualizado_sincronizacao">Já existe roteiro atualizado para hoje, deseja sincronizar novamente?\n\nSe "SIM", os dados já coletados serão apagados!</string>
+    <string name="msg_erro_foto_envio_transmissao"><![CDATA[Erro ao enviar a foto.<br/> Indicador: _DATA.<br/><br/>Verifique na coleta se a mesma esta visível.]]></string>
+    <string name="erro_internet">Ocorreu uma falha na sua conexão com a internet. Favor tente novamente</string>
+    <string name="erro_pesquisa">Erro ao enviar dados da pesquisa. Favor tente novamente.</string>
+
+    <!--MANIPULACAO LOADING-->
+    <string name="sincronizando">Sincronizando...</string>
+    <string name="envio_dados">Enviando os dados...</string>
+    <string name="manipulacao">Atualizando _TIPO %1$s de %2$s...</string>
+    <string name="manipulacao_fotos">Enviando as Fotos %1$s de %2$s...</string>
+    <string name="manipulacao_fotos_envio">Enviando as Fotos...</string>
+
+    <!-- PESQUISA -->
+    <string name="coleta">Coleta</string>
+    <string name="pesquisa_sistema">Pesquisa - _LOJA</string>
+    <string name="pesquisa">Pesquisa</string>
+    <string name="erro_pesquisa_json_foto">Erro ao enviar as Fotos</string>
+    <string name="erro_pesquisa_json">Erro ao enviar os dados da Pesquisa</string>
+    <string name="pesquisa_ja_realizada">Pesquisa já realizada!</string>
+    <string name="pendente_preenchimento">Indicadores pendentes de Preenchimento.\n\n</string>
+    <string name="enviar_pesquisa">Enviar Pesquisa</string>
+    <string name="enviar_pesquisa_corpo">Deseja enviar a Pesquisa?</string>
+    <string name="enviando_dados">Enviando os Dados...</string>
+
 </resources>

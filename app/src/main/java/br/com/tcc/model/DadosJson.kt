@@ -13,5 +13,7 @@ class DadosJson : Serializable {
     var mRoteiro = ArrayList<Roteiro>()
     @SerializedName("PRODUTO")
     var mProduto = ArrayList<Sku>()
+    @SerializedName("MENSAGEMJSONRETORNO")
+    var mMensagemEnvio: MensagemEnvio? = null
 
 }
