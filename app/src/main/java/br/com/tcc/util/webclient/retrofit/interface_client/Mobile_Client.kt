@@ -29,5 +29,5 @@ interface Mobile_Client {
 
     @FormUrlEncoded
     @POST
-    fun sendJson(@Url url: String, @Field("dadosJson") json: String): Call<DadosJson>
+    fun sendJson(@Url url: String, @Field("dadosJson") json: String, @Field("codPessoa") codPessoa: Int): Call<DadosJson>
 }

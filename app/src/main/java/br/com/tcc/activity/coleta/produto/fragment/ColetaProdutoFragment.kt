@@ -140,6 +140,7 @@ class ColetaProdutoFragment(id: Int?, context: Context, roteiro: Int) : Fragment
         }
         this@ColetaProdutoFragment.dialog!!.dismiss()
 
+        produto!!.flColetado = 1
         val callback = mContext as CallBack_Projeto
         callback.onRetorno(posicao!!)
     }

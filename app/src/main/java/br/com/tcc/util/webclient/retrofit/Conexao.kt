@@ -45,11 +45,11 @@ class Conexao(val context: Context) : Retrofit_Client() {
     }
 
     @Throws(Exception::class)
-    fun sendJson(url: String, json: String, context: Context): Call<DadosJson> {
+    fun sendJson(url: String, json: String, context: Context, codPessoa: Int): Call<DadosJson> {
         val dadosMobileClient = getClient(
             Mobile_Client::class.java
         ) as Mobile_Client
-        return dadosMobileClient.sendJson(url, json)
+        return dadosMobileClient.sendJson(url, json, codPessoa)
     }
 
 
