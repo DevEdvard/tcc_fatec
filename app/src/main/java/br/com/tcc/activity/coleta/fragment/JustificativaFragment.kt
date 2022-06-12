@@ -99,6 +99,9 @@ class JustificativaFragment(id: Int?) : FragmentCompat(), AdapterView.OnItemSele
 
     private fun gravar() {
 
+        if(!Util.validaEditText(_binding.edtJustificativa, requireContext()))
+            return
+
         val db = Database.getInstance(this.context)
         val daoPesquisa = db.roomPesquisaDao
         val daoUsuario = db.roomUsuarioDao

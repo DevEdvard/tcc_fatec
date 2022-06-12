@@ -12,7 +12,7 @@ class ColetaProduto : Serializable {
     var id: Int? = null
     @SerializedName("codPesquisa")
     var codPesquisa: Int? = null
-    @SerializedName("codProduto")
+    @SerializedName("codSku")
     var idProduto: Int? = null
     @SerializedName("desProduto")
     var desProduto: String? = null

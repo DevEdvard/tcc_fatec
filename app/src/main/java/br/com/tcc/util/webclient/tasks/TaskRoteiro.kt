@@ -71,20 +71,24 @@ constructor(context: Context) : AsyncTask<String, Void, Boolean>() {
             val daoRoteiro = db.roomRoteiroDao
             val daoProduto = db.roomSkuDao
             val daoPesquisa = db.roomPesquisaDao
+            val daoColetaSku = db.roomColetaProdutoDao
+            val daoColeta = db.roomColetaDao
 
             daoPesquisa.deleteAll()
+            daoColetaSku.deleteAll()
+            daoColeta.deleteAll()
 
             if (login != null) {
                 daoLogin.deleteAll()
                 daoLogin.insert(login)
             }
 
-            if (!roteiro.isEmpty()) {
+            if (roteiro.isNotEmpty()) {
                 daoRoteiro.deleteAll()
                 daoRoteiro.insert(roteiro)
             }
 
-            if (!produtos.isEmpty()) {
+            if (produtos.isNotEmpty()) {
                 daoProduto.deleteAll()
                 daoProduto.insert(produtos)
             }

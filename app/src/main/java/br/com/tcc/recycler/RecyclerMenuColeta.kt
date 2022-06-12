@@ -98,7 +98,7 @@ class RecyclerMenuColeta(
         val db = Database.getInstance(context)
         val dao = db.roomColetaDao
 
-        dao.deleteColetas()
+        dao.deleteAll()
         dao.insertColetas()
         db.close()
     }

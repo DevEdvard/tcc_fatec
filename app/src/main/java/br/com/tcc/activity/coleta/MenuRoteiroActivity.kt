@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.tcc.R
 import br.com.tcc.activity.coleta.fragment.JustificativaFragment
 import br.com.tcc.activity.coleta.produto.ColetaProdutoActivity
+import br.com.tcc.activity.principal.ActivityPrincipal
+import br.com.tcc.activity.principal.fragment.FragmentRoteiro
 import br.com.tcc.controller.AppCompat
 import br.com.tcc.databinding.ActivityMenuRoteiroBinding
 import br.com.tcc.model.Pesquisa
@@ -16,9 +18,10 @@ import br.com.tcc.model.Roteiro
 import br.com.tcc.model.Sku
 import br.com.tcc.recycler.RecyclerMenuColeta
 import br.com.tcc.util.Alerta
-import br.com.tcc.util.Loading
+import br.com.tcc.util.SendIntent
 import br.com.tcc.util.Util
 import br.com.tcc.util.database.Database
+import br.com.tcc.util.database.dao.PesquisaDAOHelper
 import br.com.tcc.util.database.dao.RoteiroDAOHelper
 import br.com.tcc.util.webclient.tasks.TaskEnviarDados
 
@@ -120,6 +123,7 @@ class MenuRoteiroActivity : AppCompat() {
         val db = Database.getInstance(this)
         val daoRoteiro = db.roomRoteiroDao
         val daoSku = db.roomSkuDao
+        val daoPesquisa = db.roomPesquisaDao
 
         val roteiro = daoRoteiro.selectId(loja.id!!)
         val validaColetaProduto = daoSku.selectModuloColetado(loja.codLoja!!)
@@ -134,18 +138,33 @@ class MenuRoteiroActivity : AppCompat() {
             }
 
             _binding.imgTransmissao -> {
-                Alerta.show(
-                    this@MenuRoteiroActivity, resources.getString(R.string.msg_pesquisa),
-                    resources.getString(R.string.transmissao_msg_envio),
-                    resources.getString(R.string.sim),
-                    DialogInterface.OnClickListener { dialog, which ->
-//                        Loading.show(this, this.resources.getString(R.string.login_loading_validando))
-                        TaskEnviarDados(mContext, mPesquisa!!).execute()
-                    }, false
-                )
+                validaTransmissao(roteiro, daoRoteiro, daoPesquisa)
             }
         }
         db.close()
+    }
+
+    private fun validaTransmissao(
+        roteiro: Roteiro,
+        daoRoteiro: RoteiroDAOHelper,
+        daoPesquisa: PesquisaDAOHelper,
+    ) {
+        if (roteiro.flColeta == 2) {
+//            daoRoteiro.realizaTransmissao(roteiro.id!!, Util.dataHora())
+            daoPesquisa.attTransmissao(mPesquisa!!.id!!, Util.dataHora())
+            Alerta.show(
+                this@MenuRoteiroActivity, resources.getString(R.string.msg_pesquisa),
+                resources.getString(R.string.transmissao_msg_envio),
+                resources.getString(R.string.sim),
+                DialogInterface.OnClickListener { dialog, which ->
+                    TaskEnviarDados(mContext, mPesquisa!!).execute()
+                }, false
+            )
+        } else {
+            Alerta.show(this, "Pesquisa em andamento",
+                "A pesquisa ainda está em andamento, finalize a pesquisa para transmitir.",
+                false)
+        }
     }
 
     private fun validaCheckout(
@@ -211,7 +230,9 @@ class MenuRoteiroActivity : AppCompat() {
         val daoPesquisa = db.roomPesquisaDao
         val daoUsuario = db.roomUsuarioDao
         val daoRoteiro = db.roomRoteiroDao
+        val daoColetaProduto = db.roomColetaProdutoDao
         val roteiro = daoRoteiro.selectId(loja.id!!)
+        val pesquisaOld = daoPesquisa.selectRoteiro(loja.id!!)
 
         val seTemPesquisa = daoPesquisa.selectRoteiro(loja.id)
 
@@ -232,6 +253,8 @@ class MenuRoteiroActivity : AppCompat() {
 
             daoPesquisa.deleteId(loja.id!!)
             daoPesquisa.insert(mPesquisa)
+            val pesquisaNew = daoPesquisa.selectRoteiro(loja.id)
+            daoColetaProduto.updateCodPesquisa(pesquisaOld!!.id!!, pesquisaNew!!.id!!)
         }
         db.close()
     }
@@ -242,5 +265,40 @@ class MenuRoteiroActivity : AppCompat() {
             intent.putExtra("LOJA_ROTEIRO", loja.id)
             startActivity(intent)
         }, this, loja)
+    }
+
+    override fun onRetorno(aBoolean: Boolean, mensagem: String) {
+        if(aBoolean) {
+            val db = Database.getInstance(this)
+            val dao = db.roomRoteiroDao
+
+            dao.realizaTransmissao(mPesquisa!!.codRoteiro!!, Util.dataHora())
+
+            val AlertDialog = AlertDialog
+                .Builder(this)
+                .setTitle("Transmissão concluída")
+                .setMessage("Loja transmitida com sucesso!")
+                .setNegativeButton("Ok",
+                    DialogInterface.OnClickListener { dialog, which ->
+                        dialog.dismiss()
+                        voltar() })
+            AlertDialog.create().show()
+        } else {
+            val AlertDialog = AlertDialog
+                .Builder(this)
+                .setTitle("Erro")
+                .setMessage(mensagem)
+                .setNegativeButton("Ok",
+                    DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
+            AlertDialog.create().show()
+        }
+    }
+
+    private fun voltar() {
+        SendIntent.with()
+            .mClassFrom(this@MenuRoteiroActivity)
+            .mClassTo(ActivityPrincipal::class.java)
+            .mType(R.integer.slide_from_left)
+            .go()
     }
 }

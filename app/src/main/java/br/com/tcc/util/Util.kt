@@ -5,8 +5,10 @@ import android.graphics.Color
 import android.view.Gravity
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import br.com.tcc.R
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import java.text.DateFormat
 import java.util.*
@@ -70,7 +72,7 @@ object Util {
         mSnake.show()
     }
 
-    fun dataHora() : String {
+    fun dataHora(): String {
         val data = Date()
         val formatador = DateFormat.getInstance()
         formatador.format(data)
@@ -102,4 +104,9 @@ object Util {
         return mHash
     }
 
+    fun exibirFoto(imagemView: ImageView, url: String, context: Context) {
+        Glide.with(context)
+            .load(url)
+            .into(imagemView)
+    }
 }

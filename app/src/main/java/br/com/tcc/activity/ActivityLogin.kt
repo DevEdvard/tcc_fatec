@@ -69,7 +69,6 @@ class ActivityLogin : AppCompat() {
     override fun onRetorno(aBoolean: Boolean, mensagem: String) {
         try {
             if (aBoolean) {
-
                 val db = Database.getInstance(this)
                 val dao = db.roomUsuarioDao
                 val login = dao.select()

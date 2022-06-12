@@ -11,9 +11,6 @@ interface ColetaProdutoDAOHelper {
     @Query("SELECT * FROM COLETAPRODUTO WHERE IDPRODUTO in (:id)")
     fun selectColetaProduto(id : Int) : ColetaProduto
 
-//    @Query("INSERT INTO COLETAPRODUTO VALUES (1,1,'teste', 'teste',1,'1.1',2,3)")
-//    fun insertTeste()
-
     @Query("DELETE FROM COLETAPRODUTO")
     fun deleteAll()
 
@@ -22,4 +19,7 @@ interface ColetaProdutoDAOHelper {
 
     @Query("DELETE FROM COLETAPRODUTO WHERE IDPRODUTO = :idProduto")
     fun deleteId(idProduto: Int?)
+
+    @Query("UPDATE COLETAPRODUTO SET CODPESQUISA = :codNovo WHERE CODPESQUISA = :codVelho")
+    fun updateCodPesquisa(codVelho: Int, codNovo: Int)
 }

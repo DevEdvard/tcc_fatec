@@ -24,16 +24,19 @@ interface RoteiroDAOHelper {
     @Query("DELETE FROM ROTEIRO")
     fun deleteAll()
 
+    @Query("UPDATE ROTEIRO SET FLCOLETA = 2, CHECKOUT = :dataHora, FLJUSTIFICADA = 1 WHERE ID = :id")
+    fun justifica(id: Int, dataHora: String)
+
+    @Query("SELECT * FROM ROTEIRO WHERE ID NOT IN (:idLoja) AND flColeta = 1")
+    fun validaCheckin(idLoja: Int) : List<Roteiro>
+
     @Query("UPDATE ROTEIRO SET FLCOLETA = 1, CHECKIN = :dataHora WHERE ID = :id")
     fun realizaCheckin(id: Int, dataHora: String)
 
     @Query("UPDATE ROTEIRO SET FLCOLETA = 2, CHECKOUT = :dataHora WHERE ID = :id")
     fun realizaCheckout(id: Int, dataHora: String)
 
-    @Query("UPDATE ROTEIRO SET FLCOLETA = 2, CHECKOUT = :dataHora, FLJUSTIFICADA = 1 WHERE ID = :id")
-    fun justifica(id: Int, dataHora: String)
-
-    @Query("SELECT * FROM ROTEIRO WHERE ID NOT IN (:idLoja) AND flColeta = 1")
-    fun validaCheckin(idLoja: Int) : List<Roteiro>
+    @Query("UPDATE ROTEIRO SET FLCOLETA = 3, CHECKIN = :dataHora  WHERE ID= :codRoteiro")
+    fun realizaTransmissao(codRoteiro: Int, dataHora: String)
 
 }

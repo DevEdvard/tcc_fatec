@@ -47,12 +47,22 @@ class ActivityPrincipal : AppCompat() {
     }
 
     override fun onRetorno(aBoolean: Boolean, mensagem: String) {
-        val AlertDialog = AlertDialog
-            .Builder(this)
-            .setTitle("Dados atualizados")
-            .setMessage("Os dados foram atualizados com sucesso!")
-            .setNegativeButton("Ok",
-                DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
-        AlertDialog.create().show()
+        if(aBoolean) {
+            val AlertDialog = AlertDialog
+                .Builder(this)
+                .setTitle("Dados atualizados")
+                .setMessage("Os dados foram atualizados com sucesso!")
+                .setNegativeButton("Ok",
+                    DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
+            AlertDialog.create().show()
+        } else {
+            val AlertDialog = AlertDialog
+                .Builder(this)
+                .setTitle("Erro")
+                .setMessage(mensagem)
+                .setNegativeButton("Ok",
+                    DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
+            AlertDialog.create().show()
+        }
     }
 }

@@ -8,7 +8,7 @@ import android.widget.Button
 import br.com.tcc.controller.FragmentCompat
 import br.com.tcc.databinding.FragmentPerfilBinding
 import br.com.tcc.model.Usuario
-import br.com.tcc.util.CarregaImagem
+import br.com.tcc.util.Util
 
 class FragmentPerfil : FragmentCompat() {
 
@@ -32,8 +32,8 @@ class FragmentPerfil : FragmentCompat() {
             txtNomeUsuario.text = sessao!!.nome
             txtPerfilUsuario.text = sessao.perfil
         }
-        if(sessao!!.fotoPerfil != null) {
-            CarregaImagem.donwload(_binding.imageView2, sessao.fotoPerfil!!, 1)
+        if (sessao!!.fotoPerfil != null) {
+            Util.exibirFoto(_binding.imageView2, sessao.fotoPerfil!!, requireContext())
         }
     }
 
@@ -43,7 +43,7 @@ class FragmentPerfil : FragmentCompat() {
     }
 
     override fun onClick(v: View?) {
-        when(v){
+        when (v) {
             btnDeslogar -> Usuario().deslogar(requireContext(), true)
         }
     }

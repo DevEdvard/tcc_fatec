@@ -15,5 +15,5 @@ interface ColetaDAOHelper {
     fun insertColetas()
 
     @Query("DELETE FROM COLETA")
-    fun deleteColetas()
+    fun deleteAll()
 }
