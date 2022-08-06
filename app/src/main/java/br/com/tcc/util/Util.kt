@@ -4,10 +4,9 @@ import android.content.Context
 import android.graphics.Color
 import android.view.Gravity
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import br.com.tcc.R
+import br.com.tcc.model.Justificativa
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import java.text.DateFormat
@@ -19,6 +18,32 @@ object Util {
     fun validaEditText(edt: EditText, context: Context): Boolean {
         if (edt.text.toString().length <= 0) {
             edt.setError(context.resources.getString(R.string.msg_campo_obrigatorio))
+            return false
+        }
+
+        return true
+    }
+
+    /**
+     * VALIDA SPINNER
+     *
+     * @param spn
+     * @return
+     */
+    @Throws(Exception::class)
+    fun validaSpinnerJustificativa(spn: Spinner, context: Context): Boolean {
+        val justificativa = spn.selectedItem as Justificativa
+
+        if (justificativa.id == 0) {
+
+            val subView = spn.getChildAt(0)
+            if (subView is LinearLayout) {
+                val txt = subView.getChildAt(0) as TextView
+                txt.error = context.resources.getString(R.string.msg_campo_obrigatorio)
+                txt.setTextColor(Color.RED)
+                txt.text = context.resources.getString(R.string.msg_campo_obrigatorio)
+            }
+
             return false
         }
 

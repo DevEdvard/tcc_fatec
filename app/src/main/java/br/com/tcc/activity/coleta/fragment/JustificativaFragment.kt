@@ -68,6 +68,7 @@ class JustificativaFragment(id: Int?) : FragmentCompat(), AdapterView.OnItemSele
             val db = Database.getInstance(requireContext())
             val dao = db.roomJusitivicativaDao
             val list: ArrayList<Justificativa> = ArrayList()
+            list.add(Justificativa(0,"SELECIONE"))
             list.addAll(dao.select())
 
             if (list.isEmpty()) {
@@ -76,9 +77,6 @@ class JustificativaFragment(id: Int?) : FragmentCompat(), AdapterView.OnItemSele
 
             spnJustificativa.adapter = AdapterJustificativa(requireContext(),list)
 
-            for (i in list.indices) {
-                spnJustificativa.setSelection(i)
-            }
             db.close()
         }
     }
@@ -101,6 +99,11 @@ class JustificativaFragment(id: Int?) : FragmentCompat(), AdapterView.OnItemSele
 
     private fun gravar() {
 
+        mJustificativa = mSpnJustificativa.selectedItem as Justificativa
+
+        if(!Util.validaSpinnerJustificativa(mSpnJustificativa, requireContext()))
+            return
+
         if(!Util.validaEditText(_binding.edtJustificativa, requireContext()))
             return
 
@@ -113,7 +116,6 @@ class JustificativaFragment(id: Int?) : FragmentCompat(), AdapterView.OnItemSele
 
         daoPesquisa.deleteId(idLoja!!)
         val mPesquisa = Pesquisa()
-        mJustificativa = Justificativa()
 
         _binding.apply {
             mPesquisa.codUsuario = usuario!!.id
