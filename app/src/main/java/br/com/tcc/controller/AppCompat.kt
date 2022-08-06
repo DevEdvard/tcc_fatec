@@ -27,4 +27,8 @@ abstract class AppCompat : AppCompatActivity(), CallBack_Projeto, View.OnClickLi
     override fun onRetorno(posicao: Int) {
         TODO("Not yet implemented")
     }
+
+    override fun onRetorno(aBoolean: Boolean) {
+        TODO("Not yet implemented")
+    }
 }

@@ -27,4 +27,8 @@ abstract class FragmentCompat : DialogFragment(), DialogInterface.OnShowListener
         TODO("Not yet implemented")
     }
 
+    override fun onRetorno(aBoolean: Boolean) {
+        TODO("Not yet implemented")
+    }
+
 }

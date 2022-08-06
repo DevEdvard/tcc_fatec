@@ -11,7 +11,9 @@ import android.widget.AdapterView
 import android.widget.Button
 import android.widget.Spinner
 import br.com.tcc.R
+import br.com.tcc.activity.coleta.MenuRoteiroActivity
 import br.com.tcc.adapter.AdapterJustificativa
+import br.com.tcc.controller.CallBack_Projeto
 import br.com.tcc.controller.FragmentCompat
 import br.com.tcc.databinding.FragmentJustificativaBinding
 import br.com.tcc.model.Justificativa
@@ -111,6 +113,7 @@ class JustificativaFragment(id: Int?) : FragmentCompat(), AdapterView.OnItemSele
 
         daoPesquisa.deleteId(idLoja!!)
         val mPesquisa = Pesquisa()
+        mJustificativa = Justificativa()
 
         _binding.apply {
             mPesquisa.codUsuario = usuario!!.id
@@ -125,6 +128,11 @@ class JustificativaFragment(id: Int?) : FragmentCompat(), AdapterView.OnItemSele
             daoPesquisa.insert(mPesquisa)
             daoRoteiro.justifica(idLoja!!, Util.dataHora())
             db.close()
+
+            val context = requireContext() as MenuRoteiroActivity
+            val callback = context as CallBack_Projeto
+            callback.onRetorno(true)
+
             this@JustificativaFragment.dialog!!.dismiss()
         }
     }

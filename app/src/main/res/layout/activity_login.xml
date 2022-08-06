@@ -9,28 +9,13 @@
 
     <ImageView
         android:id="@+id/login_img_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_margin="50dp"
-        android:src="@drawable/ic_launcher_background"
+        android:layout_width="250sp"
+        android:layout_height="250sp"
+        android:layout_margin="20dp"
+        android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/login_txt_bem_vindo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Bem vindo!"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_img_logo"
-        app:layout_constraintVertical_bias="0.00" />
 
     <EditText
         android:id="@+id/login_edt_usuario"
@@ -42,8 +27,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_txt_bem_vindo"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintTop_toBottomOf="@+id/login_img_logo"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/login_edt_senha"

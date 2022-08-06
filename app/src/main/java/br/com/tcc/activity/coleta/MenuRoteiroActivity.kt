@@ -301,4 +301,15 @@ class MenuRoteiroActivity : AppCompat() {
             .mType(R.integer.slide_from_left)
             .go()
     }
+
+    override fun onRetorno(aBoolean: Boolean) {
+        if(aBoolean){
+            _binding.apply {
+                imgCheckout.invalidate()
+                imgJustificativa.invalidate()
+                imgCheckout.setBackgroundResource(R.drawable.menu_checkout_ok)
+                imgJustificativa.setBackgroundResource(R.drawable.menu_justificativa_ok)
+            }
+        }
+    }
 }
