@@ -25,12 +25,14 @@ constructor(context: Context) : AsyncTask<String, Void, Boolean>() {
         this.context = context
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onPreExecute() {
         super.onPreExecute()
         Loading.hide()
         Loading.show(context, context.resources.getString(R.string.login_loading_validando))
     }
 
+    @Deprecated("Deprecated in Java")
     @SuppressLint("StringFormatInvalid")
     override fun doInBackground(vararg params: String?): Boolean {
 
@@ -103,6 +105,7 @@ constructor(context: Context) : AsyncTask<String, Void, Boolean>() {
         return false
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onPostExecute(result: Boolean) {
         super.onPostExecute(result)
         Loading.hide()

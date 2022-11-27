@@ -1,3 +1,5 @@
+@file:Suppress("OverrideDeprecatedMigration")
+
 package br.com.tcc.util.webclient.tasks
 
 import android.annotation.SuppressLint
@@ -29,12 +31,14 @@ class TaskEnviarDados(context: Context, pesquisa: Pesquisa) : AsyncTask<String?,
     private val callback: CallBack_Projeto
     var mensagem: String = ""
 
+    @Deprecated("Deprecated in Java")
     override fun onPreExecute() {
         super.onPreExecute()
         Loading.hide()
         Loading.show(mContext, mContext.resources.getString(R.string.sincronizando))
     }
 
+    @Deprecated("Deprecated in Java")
     override fun doInBackground(vararg strings: String?): Boolean {
         try {
             Thread.sleep(200)
@@ -86,6 +90,7 @@ class TaskEnviarDados(context: Context, pesquisa: Pesquisa) : AsyncTask<String?,
         return false
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onPostExecute(aBoolean: Boolean) {
         super.onPostExecute(aBoolean)
         Loading.hide()
